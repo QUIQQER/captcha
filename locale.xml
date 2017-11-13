@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<locales>
+  <groups name="quiqqer/captcha" datatype="php,js">
+    <locale name="package.title">
+      <de><![CDATA[QUIQQER - Captcha]]></de>
+      <en><![CDATA[QUIQQER - Captcha]]></en>
+    </locale>
+  <locale name="package.description"><de><![CDATA[QUIQQER - Captcha]]></de><en><![CDATA[QUIQQER - Captcha]]></en></locale></groups>
+</locales>
