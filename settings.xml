@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiqqer>
+    <settings>
+
+        <config>
+
+            <section name="modules">
+                <conf name="default">
+                    <type><![CDATA[string]]></type>
+                </conf>
+            </section>
+
+            <section name="google">
+                <conf name="clientId">
+                    <type><![CDATA[string]]></type>
+                </conf>
+            </section>
+
+        </config>
+
+        <window>
+            <title>
+                <locale group="quiqqer/captcha" var="menu.title"/>
+            </title>
+            <params>
+                <icon>fa fa-plug</icon>
+            </params>
+
+            <categories>
+
+                <category name="general">
+                    <text>
+                        <locale group="quiqqer/captcha" var="settings.category.general.title"/>
+                    </text>
+                    <icon>fa fa-cogs</icon>
+
+                    <settings title="modules_section" name="modules_section">
+                        <title>
+                            <locale group="quiqqer/captcha" var="settings.section.modules_section.title"/>
+                        </title>
+
+                        <input conf="modules.default" data-qui="package/quiqqer/captcha/bin/controls/settings/CaptchaSelect">
+                            <text>
+                                <locale group="quiqqer/captcha" var="settings.modules.default.title"/>
+                            </text>
+                            <description>
+                                <locale group="quiqqer/captcha" var="settings.modules.default.description"/>
+                            </description>
+                        </input>
+                    </settings>
+
+                    <settings title="google_section" name="google_section">
+                        <title>
+                            <locale group="quiqqer/captcha" var="settings.section.google_section.title"/>
+                        </title>
+
+                        <input conf="google.clientId" type="checkbox">
+                            <text>
+                                <locale group="quiqqer/captcha" var="settings.google.clientId.title"/>
+                            </text>
+                            <description>
+                                <locale group="quiqqer/captcha" var="settings.google.clientId.description"/>
+                            </description>
+                        </input>
+                    </settings>
+                </category>
+
+            </categories>
+        </window>
+
+    </settings>
+</quiqqer>

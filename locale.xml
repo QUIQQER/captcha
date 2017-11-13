@@ -1,9 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <locales>
-  <groups name="quiqqer/captcha" datatype="php,js">
-    <locale name="package.title">
-      <de><![CDATA[QUIQQER - Captcha]]></de>
-      <en><![CDATA[QUIQQER - Captcha]]></en>
-    </locale>
-  <locale name="package.description"><de><![CDATA[QUIQQER - Captcha]]></de><en><![CDATA[QUIQQER - Captcha]]></en></locale></groups>
+    <groups name="quiqqer/captcha" datatype="php,js">
+
+        <locale name="package.title">
+            <de><![CDATA[QUIQQER - Captcha]]></de>
+            <en><![CDATA[QUIQQER - Captcha]]></en>
+        </locale>
+        <locale name="package.description">
+            <de><![CDATA[Einbindung von Captcha-Eingaben für Formulare u.ä.]]></de>
+            <en><![CDATA[Integration of Captchas for forms etc.]]></en>
+        </locale>
+
+        <!-- Settings -->
+        <locale name="menu.title">
+            <de><![CDATA[QUIQQER Captcha]]></de>
+            <en><![CDATA[QUIQQER Captcha]]></en>
+        </locale>
+        <locale name="settings.category.modules.title">
+            <de><![CDATA[Captcha-Module]]></de>
+            <en><![CDATA[Captcha modules]]></en>
+        </locale>
+        <locale name="settings.section.modules_section.title">
+            <de><![CDATA[Allgemeine Einstellungen]]></de>
+            <en><![CDATA[General Settings]]></en>
+        </locale>
+        <locale name="settings.modules.default.title">
+            <de><![CDATA[Standard Captcha-Module]]></de>
+            <en><![CDATA[Default captcha module]]></en>
+        </locale>
+        <locale name="settings.modules.default.description" html="true">
+            <de><![CDATA[Bitte legen Sie das Captcha-Modul fest, welches standardmäßig geladen wird, wenn Captchas eingebunden werden.]]></de>
+            <en><![CDATA[Please determine the Captcha module that is loaded by default if Captchas are implemented.]]></en>
+        </locale>
+        <locale name="settings.category.google.title">
+            <de><![CDATA[Captcha-Module]]></de>
+            <en><![CDATA[Captcha modules]]></en>
+        </locale>
+        <locale name="settings.section.google_section.title">
+            <de><![CDATA[Google Captcha (reCAPTCHA)]]></de>
+            <en><![CDATA[Google Captcha (reCAPTCHA)]]></en>
+        </locale>
+        <locale name="settings.google.clientId.title">
+            <de><![CDATA[Client-ID]]></de>
+            <en><![CDATA[Client-ID]]></en>
+        </locale>
+        <locale name="settings.google.clientId.description" html="true">
+            <de><![CDATA[OAuth-2.0 Client-ID des Google API Projekts. Siehe <a href="https://console.developers.google.com/apis" target="_blank">https://console.developers.google.com/apis</a>.]]></de>
+            <en><![CDATA[OAuth-2.0 Client-ID of the Google API project. See <a href="https://console.developers.google.com/apis" target="_blank">https://console.developers.google.com/apis</a>.]]></en>
+        </locale>
+
+    </groups>
 </locales>
