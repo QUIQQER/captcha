@@ -14,7 +14,7 @@ use QUI\Captcha\Modules\Google;
  *
  * Google reCAPTCHA Control
  */
-class Control extends QUI\Control
+class Control extends QUI\Captcha\Controls\CaptchaControl
 {
     /**
      * ControlWrapper constructor.
@@ -27,7 +27,7 @@ class Control extends QUI\Control
         $this->addCSSClass('quiqqer-captcha-google');
 
         $this->setJavaScriptControl('package/quiqqer/captcha/bin/controls/modules/Google');
-        $this->setJavaScriptControlOption('clientid', Google::getClientId());
+        $this->setJavaScriptControlOption('sitekey', Google::getSiteKey());
     }
 
     /**

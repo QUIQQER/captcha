@@ -25,16 +25,72 @@ class Google extends QUI\Captcha\AbstractCaptcha
      */
     public static function isValid($data)
     {
+        $url    = 'https://www.google.com/recaptcha/api/siteverify?';
+        $params = array(
+            'secret'   => self::getSecretKey(),
+            'response' => $data
+        );
 
+        $url .= http_build_query($params);
+
+        $validationResponse = file_get_contents($url);
+
+        if (empty($validationResponse)) {
+            QUI\System\Log::addError(
+                'Google reCAPTCHA response could not be validated: Empty response.'
+            );
+
+            return false;
+        }
+
+        $validationResponse = json_decode($validationResponse, true);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            QUI\System\Log::addError(
+                'Google reCAPTCHA response could not be validated: Response was no valid JSON.'
+            );
+
+            return false;
+        }
+
+        if (!empty($validationResponse['error-codes'])) {
+            QUI\System\Log::addError(
+                'Google reCAPTCHA response could not be validated: ' . implode(', ', $validationResponse['error-codes'])
+            );
+
+            return false;
+        }
+
+        return $validationResponse['success'];
     }
 
     /**
-     * Get Google API Client ID
+     * Get Google reCAPTCHA v2 Site Key
      *
      * @return string|false
      */
-    public static function getClientId()
+    public static function getSiteKey()
     {
-        return QUI::getPackage('quiqqer/captcha')->getConfig()->getValue('google', 'clientId');
+        return QUI::getPackage('quiqqer/captcha')->getConfig()->getValue('google', 'siteKey');
+    }
+
+    /**
+     * Get Google reCAPTCHA v2 Secret Key
+     *
+     * @return string|false
+     */
+    protected static function getSecretKey()
+    {
+        return QUI::getPackage('quiqqer/captcha')->getConfig()->getValue('google', 'secretKey');
+    }
+
+    /**
+     * Does this Captcha module require JavaScript?
+     *
+     * @return bool
+     */
+    public static function requiresJavaScript()
+    {
+        return true;
     }
 }

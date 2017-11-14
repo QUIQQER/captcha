@@ -25,12 +25,16 @@
             <en><![CDATA[General Settings]]></en>
         </locale>
         <locale name="settings.modules.default.title">
-            <de><![CDATA[Standard Captcha-Module]]></de>
+            <de><![CDATA[Standard Captcha-Modul]]></de>
             <en><![CDATA[Default captcha module]]></en>
         </locale>
         <locale name="settings.modules.default.description" html="true">
             <de><![CDATA[Bitte legen Sie das Captcha-Modul fest, welches standardmäßig geladen wird, wenn Captchas eingebunden werden.]]></de>
             <en><![CDATA[Please determine the Captcha module that is loaded by default if Captchas are implemented.]]></en>
+        </locale>
+        <locale name="settings.category.general.title">
+            <de><![CDATA[Captcha-Einstellungen]]></de>
+            <en><![CDATA[Captcha settings]]></en>
         </locale>
         <locale name="settings.category.google.title">
             <de><![CDATA[Captcha-Module]]></de>
@@ -40,13 +44,27 @@
             <de><![CDATA[Google Captcha (reCAPTCHA)]]></de>
             <en><![CDATA[Google Captcha (reCAPTCHA)]]></en>
         </locale>
-        <locale name="settings.google.clientId.title">
-            <de><![CDATA[Client-ID]]></de>
-            <en><![CDATA[Client-ID]]></en>
+        <locale name="settings.google.siteKey.title">
+            <de><![CDATA[Webseitenschlüssel]]></de>
+            <en><![CDATA[Site key]]></en>
         </locale>
-        <locale name="settings.google.clientId.description" html="true">
-            <de><![CDATA[OAuth-2.0 Client-ID des Google API Projekts. Siehe <a href="https://console.developers.google.com/apis" target="_blank">https://console.developers.google.com/apis</a>.]]></de>
-            <en><![CDATA[OAuth-2.0 Client-ID of the Google API project. See <a href="https://console.developers.google.com/apis" target="_blank">https://console.developers.google.com/apis</a>.]]></en>
+        <locale name="settings.google.siteKey.description" html="true">
+            <de><![CDATA[Googe reCAPTCHA v2 Websiteschlüssel. Siehe <a href="https://www.google.com/recaptcha/admin" target="_blank">https://www.google.com/recaptcha/admin</a>.]]></de>
+            <en><![CDATA[Google reCAPTCHA v2 Site key. See <a href="https://www.google.com/recaptcha/admin" target="_blank">https://www.google.com/recaptcha/admin</a>.]]></en>
+        </locale>
+        <locale name="settings.google.secretKey.title">
+            <de><![CDATA[Geheimer Schlüssel]]></de>
+            <en><![CDATA[Secret key]]></en>
+        </locale>
+
+        <!-- Module titles and descriptions -->
+        <locale name="captcha.title.Google">
+            <de><![CDATA[Google (reCAPTCHA)]]></de>
+            <en><![CDATA[Google (reCAPTCHA)]]></en>
+        </locale>
+        <locale name="captcha.descrption.Google">
+            <de><![CDATA[Benötigt JavaScript.]]></de>
+            <en><![CDATA[Requires JavaScript.]]></en>
         </locale>
 
     </groups>

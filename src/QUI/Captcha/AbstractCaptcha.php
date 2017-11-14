@@ -19,7 +19,7 @@ abstract class AbstractCaptcha implements CaptchaInterface
             $Locale = QUI::getLocale();
         }
 
-        $Locale->get('quiqqer/captcha', 'captcha.title.' . self::getModuleName());
+        return $Locale->get('quiqqer/captcha', 'captcha.title.' . self::getModuleName());
     }
 
     /**
@@ -34,7 +34,7 @@ abstract class AbstractCaptcha implements CaptchaInterface
             $Locale = QUI::getLocale();
         }
 
-        $Locale->get('quiqqer/captcha', 'captcha.description.' . self::getModuleName());
+        return $Locale->get('quiqqer/captcha', 'captcha.description.' . self::getModuleName());
     }
 
     /**
@@ -44,7 +44,7 @@ abstract class AbstractCaptcha implements CaptchaInterface
      */
     public static function getModuleName()
     {
-        $parts = explode('\\', get_class());
+        $parts = explode('\\', get_called_class());
         return array_pop($parts);
     }
 }

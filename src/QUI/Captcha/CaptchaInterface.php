@@ -44,4 +44,11 @@ interface CaptchaInterface
      * @return string
      */
     public static function getModuleName();
+
+    /**
+     * Does this Captcha module require JavaScript?
+     *
+     * @return bool
+     */
+    public static function requiresJavaScript();
 }

@@ -21,7 +21,8 @@ define('package/quiqqer/captcha/bin/controls/settings/CaptchaSelect', [
 
         Binds: [
             '$onInject',
-            '$onChange'
+            '$onChange',
+            '$load'
         ],
 
         options: {
@@ -46,7 +47,12 @@ define('package/quiqqer/captcha/bin/controls/settings/CaptchaSelect', [
             this.$Input      = this.getElm();
             this.$Input.type = 'hidden';
 
-            this.Loader.inject(this.$Elm);
+            var Select = this.create();
+            Select.inject(this.$Input, 'after');
+
+            this.Loader.inject(Select);
+
+            Select.addClass('field-container-field');
 
             this.$load();
         },
@@ -58,6 +64,8 @@ define('package/quiqqer/captcha/bin/controls/settings/CaptchaSelect', [
             var self = this;
 
             this.Loader.show();
+
+            console.log(this);
 
             QUIAjax.get(
                 'package_quiqqer_captcha_ajax_getCaptchaList', function (modules) {

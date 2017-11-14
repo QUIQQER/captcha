@@ -5,13 +5,17 @@
         <config>
 
             <section name="modules">
-                <conf name="default">
+                <conf name="defaultCaptcha">
                     <type><![CDATA[string]]></type>
+                    <defaultvalue><![CDATA[Google]]></defaultvalue>
                 </conf>
             </section>
 
             <section name="google">
-                <conf name="clientId">
+                <conf name="siteKey">
+                    <type><![CDATA[string]]></type>
+                </conf>
+                <conf name="secretKey">
                     <type><![CDATA[string]]></type>
                 </conf>
             </section>
@@ -23,7 +27,7 @@
                 <locale group="quiqqer/captcha" var="menu.title"/>
             </title>
             <params>
-                <icon>fa fa-plug</icon>
+                <icon>fa fa-language</icon>
             </params>
 
             <categories>
@@ -39,7 +43,7 @@
                             <locale group="quiqqer/captcha" var="settings.section.modules_section.title"/>
                         </title>
 
-                        <input conf="modules.default" data-qui="package/quiqqer/captcha/bin/controls/settings/CaptchaSelect">
+                        <input conf="modules.defaultCaptcha" data-qui="package/quiqqer/captcha/bin/controls/settings/CaptchaSelect">
                             <text>
                                 <locale group="quiqqer/captcha" var="settings.modules.default.title"/>
                             </text>
@@ -54,13 +58,18 @@
                             <locale group="quiqqer/captcha" var="settings.section.google_section.title"/>
                         </title>
 
-                        <input conf="google.clientId" type="checkbox">
+                        <input conf="google.siteKey" type="text">
                             <text>
-                                <locale group="quiqqer/captcha" var="settings.google.clientId.title"/>
+                                <locale group="quiqqer/captcha" var="settings.google.siteKey.title"/>
                             </text>
                             <description>
-                                <locale group="quiqqer/captcha" var="settings.google.clientId.description"/>
+                                <locale group="quiqqer/captcha" var="settings.google.siteKey.description"/>
                             </description>
+                        </input>
+                        <input conf="google.secretKey" type="text">
+                            <text>
+                                <locale group="quiqqer/captcha" var="settings.google.secretKey.title"/>
+                            </text>
                         </input>
                     </settings>
                 </category>
