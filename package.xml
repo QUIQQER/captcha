@@ -1,15 +1,15 @@
 <quiqqer>
     <package>
         <title>
-            <locale group='quiqqer/captcha' var='package.title'/>
+            <locale group="quiqqer/captcha" var="package.title"/>
         </title>
 
         <description>
-           <locale group='quiqqer/captcha' var='package.description'/>
+           <locale group="quiqqer/captcha" var="package.description"/>
         </description>
 
         <!-- Hauptbild -->
-        <image src='URL_OPT_DIR/quiqqer/captcha/bin/quiqqer_logo.png'/>
+        <!--<image src="URL_OPT_DIR/quiqqer/captcha/bin/quiqqer_logo.png"/>-->
 
          <!-- More preview images
         <preview>
@@ -20,6 +20,19 @@
             <image src="URL_OPT_DIR/quiqqer/quiqqer/bin/preview/5.png"/>
         </preview>
         -->
+
+        <support>
+            <email><![CDATA[support@pcsg.de]]></email>
+            <forum><![CDATA[https://community.quiqqer.com]]></forum>
+            <source><![CDATA[https://dev.quiqqer.com/quiqqer/captcha]]></source>
+            <issues><![CDATA[https://dev.quiqqer.com/quiqqer/captcha/issues]]></issues>
+            <wiki><![CDATA[https://dev.quiqqer.com/quiqqer/captcha/wikis/home]]></wiki>
+        </support>
+
+        <copyright>
+            <name><![CDATA[PCSG - Computer & Internet Service OHG]]></name>
+            <license><![CDATA[GPL-3.0+]]></license>
+        </copyright>
 
     </package>
 </quiqqer>
