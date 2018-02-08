@@ -3,7 +3,10 @@
   "type": "quiqqer-plugin",
   "description": "QUIQQER Captcha controls",
   "version": "dev-dev",
-  "license": "GPL-3.0+",
+  "license": [
+    "PCSG QL-1.0",
+    "CC BY-NC-SA 4.0"
+  ],
   "authors": [
     {
       "name": "Patrick Müller",
