@@ -22,6 +22,7 @@ class Google extends QUI\Captcha\AbstractCaptcha
      *
      * @param string $data
      * @return bool
+     * @throws QUI\Exception
      */
     public static function isValid($data)
     {
@@ -68,6 +69,7 @@ class Google extends QUI\Captcha\AbstractCaptcha
      * Get Google reCAPTCHA v2 Site Key
      *
      * @return string|false
+     * @throws QUI\Exception
      */
     public static function getSiteKey()
     {
@@ -78,6 +80,7 @@ class Google extends QUI\Captcha\AbstractCaptcha
      * Get Google reCAPTCHA v2 Secret Key
      *
      * @return string|false
+     * @throws QUI\Exception
      */
     protected static function getSecretKey()
     {
