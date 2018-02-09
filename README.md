@@ -23,7 +23,9 @@ The Package Name is: quiqqer/captcha
 
 Usage
 ----------
-### Frontend
+### Showing and validating a CAPTCHA
+
+#### Frontend
 ```js
 require(['package/quiqqer/captcha/bin/controls/CaptchaDisplay'], function(CaptchaDisplay) {
     var MyCaptchaDisplay = new CaptchaDisplay().inject(document.body);
@@ -44,7 +46,7 @@ require(['package/quiqqer/captcha/bin/controls/CaptchaDisplay'], function(Captch
 });
 ```
 
-### Backend
+#### Backend
 ```php
 $isReponseValid = \QUI\Captcha\Handler::isResponseValid($response);
 
@@ -54,6 +56,14 @@ if ($isResponseValid) {
     // failure! user is a bot (probably)
 }
 ```
+
+### Implementing your own CAPTCHA
+For an example of a CAPTCHA implementation you can see the class `\QUI\Captcha\Modules\Google` which implements reCAPTCHA.
+
+A CAPTCHA implementation requires:
+* CAPTCHA class (must implement `\QUI\Captcha\CaptchaInterface`)
+* CAPTCHA PHP Control (should extend `\QUI\Captcha\Controls\CaptchaControl`)
+* CAPTCHA JavaScript Control (must extend `package/quiqqer/captcha/bin/controls/Captcha`)
 
 Contribute
 ----------
