@@ -31,7 +31,7 @@ require(['package/quiqqer/captcha/bin/controls/CaptchaDisplay'], function(Captch
     MyCaptchaDisplay.getCaptchaControl().then(function (CaptchaControl) {
         CaptchaControl.addEvents({
             onSuccess: function (response) {
-                // CAPTCHA successfully solved -> response can be send to backend for validation
+                // CAPTCHA successfully solved -> response can be sent to backend for validation
                 sendToBackendForValidation(response);
             },
             onExpired: function () {
