@@ -28,6 +28,8 @@ class Control extends QUI\Captcha\Controls\CaptchaControl
 
         $this->setJavaScriptControl('package/quiqqer/captcha/bin/controls/modules/Google');
         $this->setJavaScriptControlOption('sitekey', Google::getSiteKey());
+
+        $this->addCSSFile(dirname(__FILE__) . '/Control.css');
     }
 
     /**
