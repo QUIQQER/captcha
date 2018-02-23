@@ -31,9 +31,11 @@ define('package/quiqqer/captcha/bin/controls/CaptchaDisplay', [
 
             this.Loader          = new QUILoader();
             this.$CaptchaControl = null;
+            this.$ResponseInput  = null;
 
             this.addEvents({
-                onInject: this.$onInject
+                onInject: this.$onInject,
+                onImport: this.$onImport
             });
         },
 
@@ -53,6 +55,44 @@ define('package/quiqqer/captcha/bin/controls/CaptchaDisplay', [
                     self.Loader.hide();
                 });
             });
+        },
+
+        /**
+         * event: onImport
+         */
+        $onImport: function () {
+            var self                 = this;
+            var CaptchaResponseInput = this.$Elm.getElement('input[name="captchaResponse"]');
+
+            if (!CaptchaResponseInput) {
+                return;
+            }
+
+            this.$ResponseInput = CaptchaResponseInput;
+
+            this.Loader.show();
+
+            this.getCaptchaControl().then(function (CaptchaControl) {
+                self.Loader.show();
+
+                CaptchaControl.addEvents({
+                    onSuccess: function (response) {
+                        CaptchaResponseInput.value = response;
+                    },
+                    onExpired: function () {
+                        CaptchaResponseInput.value = '';
+                    }
+                });
+            });
+        },
+
+        /**
+         * Get input for CAPTCHA response
+         *
+         * @return {null|HTMLInputElement}
+         */
+        $getCaptchaResponseInput: function () {
+            return this.$ResponseInput;
         },
 
         /**
@@ -80,7 +120,7 @@ define('package/quiqqer/captcha/bin/controls/CaptchaDisplay', [
                         'package': 'quiqqer/captcha',
                         onError  : reject
                     }
-                )
+                );
             });
         }
     });
