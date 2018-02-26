@@ -9,7 +9,7 @@
         </description>
 
         <!-- Hauptbild -->
-        <!--<image src="URL_OPT_DIR/quiqqer/captcha/bin/quiqqer_logo.png"/>-->
+        <image src="URL_OPT_DIR/quiqqer/captcha/bin/images/Logo.jpg"/>
 
         <preview>
             <image src="URL_OPT_DIR/quiqqer/captcha/bin/images/preview/Backend_Settings.png"/>

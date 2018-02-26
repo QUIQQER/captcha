@@ -1,3 +1,5 @@
+![QUIQQER Captcha](bin/images/Readme.jpg)
+
 QUIQQER Captcha
 ========
 
