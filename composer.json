@@ -2,7 +2,7 @@
   "name": "quiqqer/captcha",
   "type": "quiqqer-plugin",
   "description": "QUIQQER Captcha controls",
-  "version": "dev-dev",
+  "version": "1.0.0",
   "license": [
     "PCSG QL-1.0",
     "CC BY-NC-SA 4.0"
