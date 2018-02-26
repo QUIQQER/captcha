@@ -62,7 +62,7 @@ define('package/quiqqer/captcha/bin/controls/CaptchaDisplay', [
          */
         $onImport: function () {
             var self                 = this;
-            var CaptchaResponseInput = this.$Elm.getElement('input[name="captchaResponse"]');
+            var CaptchaResponseInput = this.$Elm.getElement('input[name="quiqqer-captcha-response"]');
 
             if (!CaptchaResponseInput) {
                 return;
