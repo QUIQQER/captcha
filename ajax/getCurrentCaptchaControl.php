@@ -14,7 +14,7 @@ use QUI\Captcha\Handler;
 QUI::$Ajax->registerFunction(
     'package_quiqqer_captcha_ajax_getCurrentCaptchaControl',
     function () {
-        return Handler::getCaptchaControl()->create();
+        return Handler::getDefaultCaptchaModuleControl()->create();
     },
     array()
 );
