@@ -41,10 +41,29 @@ define('package/quiqqer/captcha/bin/controls/modules/Google', [
          * event: onImport
          */
         $onImport: function () {
+            var self = this;
+
             this.Loader.inject(this.$Elm);
             this.Loader.show();
 
+            if (window.loadingGoogleReCaptcha) {
+                var waitForGoogleReCaptcha = setInterval(function() {
+                    if (typeof grecaptcha !== 'undefined') {
+                        clearInterval(waitForGoogleReCaptcha);
+                        self.$onGoogleCaptchaLoaded();
+                    }
+                }, 200);
+
+                return;
+            }
+
+            if (typeof grecaptcha !== 'undefined') {
+                this.$onGoogleCaptchaLoaded();
+                return;
+            }
+
             window.$onGoogleCaptchaLoaded = this.$onGoogleCaptchaLoaded;
+            window.loadingGoogleReCaptcha = true;
 
             new Element('script', {
                 src  : 'https://www.google.com/recaptcha/api.js?onload=$onGoogleCaptchaLoaded&render=explicit',
@@ -57,6 +76,8 @@ define('package/quiqqer/captcha/bin/controls/modules/Google', [
          * Callback function for Google api.js
          */
         $onGoogleCaptchaLoaded: function () {
+            window.loadingGoogleReCaptcha = false;
+
             var self = this;
 
             this.Loader.hide();
