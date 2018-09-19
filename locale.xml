@@ -66,6 +66,14 @@
             <de><![CDATA[Benötigt JavaScript.]]></de>
             <en><![CDATA[Requires JavaScript.]]></en>
         </locale>
+        <locale name="captcha.title.GoogleInvisible">
+            <de><![CDATA[Google (reCAPTCHA - unsichtbar)]]></de>
+            <en><![CDATA[Google (reCAPTCHA - invisible)]]></en>
+        </locale>
+        <locale name="captcha.descrption.GoogleInvisible">
+            <de><![CDATA[Benötigt JavaScript.]]></de>
+            <en><![CDATA[Requires JavaScript.]]></en>
+        </locale>
 
     </groups>
 </locales>

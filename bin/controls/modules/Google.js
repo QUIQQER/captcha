@@ -24,7 +24,8 @@ define('package/quiqqer/captcha/bin/controls/modules/Google', [
         ],
 
         options: {
-            sitekey: false // Google reCAPTCHA v2 Site Key
+            sitekey  : false,   // Google reCAPTCHA v2 Site Key
+            invisible: false    // use invisible captcha
         },
 
         initialize: function (options) {
@@ -41,10 +42,29 @@ define('package/quiqqer/captcha/bin/controls/modules/Google', [
          * event: onImport
          */
         $onImport: function () {
+            var self = this;
+
             this.Loader.inject(this.$Elm);
             this.Loader.show();
 
+            if (window.loadingGoogleReCaptcha) {
+                var waitForGoogleReCaptcha = setInterval(function () {
+                    if (typeof grecaptcha !== 'undefined') {
+                        clearInterval(waitForGoogleReCaptcha);
+                        self.$onGoogleCaptchaLoaded();
+                    }
+                }, 200);
+
+                return;
+            }
+
+            if (typeof grecaptcha !== 'undefined') {
+                this.$onGoogleCaptchaLoaded();
+                return;
+            }
+
             window.$onGoogleCaptchaLoaded = this.$onGoogleCaptchaLoaded;
+            window.loadingGoogleReCaptcha = true;
 
             new Element('script', {
                 src  : 'https://www.google.com/recaptcha/api.js?onload=$onGoogleCaptchaLoaded&render=explicit',
@@ -57,23 +77,37 @@ define('package/quiqqer/captcha/bin/controls/modules/Google', [
          * Callback function for Google api.js
          */
         $onGoogleCaptchaLoaded: function () {
+            window.loadingGoogleReCaptcha = false;
+
             var self = this;
 
             this.Loader.hide();
 
             var DisplayElm = this.$Elm.getElement('.quiqqer-captcha-google-display');
 
-            grecaptcha.render(
-                DisplayElm, {
-                    sitekey           : this.getAttribute('sitekey'),
-                    callback          : function (response) {
-                        self.$onCaptchaSuccess(response);
-                    },
-                    'expired-callback': function () {
-                        self.$onCaptchaExpired();
-                    }
+            var Options = {
+                sitekey           : this.getAttribute('sitekey'),
+                callback          : function (response) {
+                    console.log(response);
+                    self.$onCaptchaSuccess(response);
+                },
+                'expired-callback': function () {
+                    self.$onCaptchaExpired();
+                },
+                'error-callback': function() {
+                    console.log(arguments);
                 }
-            );
+            };
+
+            if (this.getAttribute('invisible')) {
+                Options.size = 'invisible';
+            }
+
+            grecaptcha.render(DisplayElm, Options);
+
+            if (this.getAttribute('invisible')) {
+                grecaptcha.execute();
+            }
         }
     });
 });

@@ -20,14 +20,14 @@ class Handler
      */
     public static function getDefaultCaptchaModuleControl()
     {
-        $defaultModule = QUI::getPackage('quiqqer/captcha')->getConfig()->get('modules', 'defaultCaptcha');
+        $defaultModule      = QUI::getPackage('quiqqer/captcha')->getConfig()->get('modules', 'defaultCaptcha');
         $defaultModuleClass = self::getCaptchaModule($defaultModule);
 
         if (!$defaultModuleClass) {
             return false;
         }
 
-        return call_user_func($defaultModuleClass . '::getControl');
+        return call_user_func($defaultModuleClass.'::getControl');
     }
 
     /**
@@ -49,7 +49,7 @@ class Handler
             return false;
         }
 
-        return call_user_func($moduleClass . '::isValid', $response);
+        return call_user_func($moduleClass.'::isValid', $response);
     }
 
     /**
@@ -70,7 +70,7 @@ class Handler
             return false;
         }
 
-        return call_user_func($moduleClass . '::requiresJavaScript');
+        return call_user_func($moduleClass.'::requiresJavaScript');
     }
 
     /**
@@ -81,7 +81,7 @@ class Handler
      */
     public static function getCaptchaModule($name)
     {
-        $class = 'QUI\\Captcha\\Modules\\' . $name;
+        $class = 'QUI\\Captcha\\Modules\\'.$name;
 
         if (class_exists($class)) {
             return $class;
@@ -91,22 +91,44 @@ class Handler
     }
 
     /**
+     * Check if the given CAPTCHA module is invisible
+     *
+     * @param string $response
+     * @param string $module (optional) - Captcha module name [default: Default Captcha module]
+     * @return bool
+     */
+    public static function isInvisible($module = null)
+    {
+        if (is_null($module)) {
+            $module = QUI::getPackage('quiqqer/captcha')->getConfig()->get('modules', 'defaultCaptcha');
+        }
+
+        $moduleClass = self::getCaptchaModule($module);
+
+        if (!$moduleClass) {
+            return false;
+        }
+
+        return call_user_func($moduleClass.'::isInvisible');
+    }
+
+    /**
      * Get list of all Captcha modules
      *
      * @return array
      */
     public static function getList()
     {
-        $modules = array();
+        $modules = [];
 
-        foreach (File::readDir(dirname(__FILE__) . '/Modules', true) as $file) {
-            $class     = 'QUI\\Captcha\\Modules\\' . basename($file, '.php');
+        foreach (File::readDir(dirname(__FILE__).'/Modules', true) as $file) {
+            $class = 'QUI\\Captcha\\Modules\\'.basename($file, '.php');
 
-            $modules[] = array(
-                'name'        => call_user_func($class . '::getModuleName'),
-                'title'       => call_user_func($class . '::getTitle'),
-                'description' => call_user_func($class . '::getDescription')
-            );
+            $modules[] = [
+                'name'        => call_user_func($class.'::getModuleName'),
+                'title'       => call_user_func($class.'::getTitle'),
+                'description' => call_user_func($class.'::getDescription')
+            ];
         }
 
         return $modules;

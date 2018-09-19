@@ -41,4 +41,14 @@ class CaptchaDisplay extends QUI\Control
 
         return $Engine->fetch(dirname(__FILE__) . '/CaptchaDisplay.html');
     }
+
+    /**
+     * Check if this CAPTCHA has a visible representation or not
+     *
+     * @return bool
+     */
+    public function isInvisible()
+    {
+        return Handler::isInvisible();
+    }
 }
