@@ -2,7 +2,7 @@
   "name": "quiqqer/captcha",
   "type": "quiqqer-plugin",
   "description": "QUIQQER Captcha controls",
-  "version": "dev-master",
+  "version": "1.1.0",
   "license": [
     "PCSG QL-1.0",
     "CC BY-NC-SA 4.0"
@@ -20,7 +20,7 @@
     "url": "http://www.pcsg.de"
   },
   "require": {
-    "quiqqer/quiqqer": ">=1.1|dev-master|dev-dev"
+    "quiqqer/quiqqer": ">=1.1|dev-master"
   },
   "autoload": {
     "psr-4": {
