@@ -24,7 +24,8 @@ define('package/quiqqer/captcha/bin/controls/modules/Google', [
         ],
 
         options: {
-            sitekey: false // Google reCAPTCHA v2 Site Key
+            sitekey  : false,   // Google reCAPTCHA v2 Site Key
+            invisible: false    // use invisible captcha
         },
 
         initialize: function (options) {
@@ -47,7 +48,7 @@ define('package/quiqqer/captcha/bin/controls/modules/Google', [
             this.Loader.show();
 
             if (window.loadingGoogleReCaptcha) {
-                var waitForGoogleReCaptcha = setInterval(function() {
+                var waitForGoogleReCaptcha = setInterval(function () {
                     if (typeof grecaptcha !== 'undefined') {
                         clearInterval(waitForGoogleReCaptcha);
                         self.$onGoogleCaptchaLoaded();
@@ -84,17 +85,29 @@ define('package/quiqqer/captcha/bin/controls/modules/Google', [
 
             var DisplayElm = this.$Elm.getElement('.quiqqer-captcha-google-display');
 
-            grecaptcha.render(
-                DisplayElm, {
-                    sitekey           : this.getAttribute('sitekey'),
-                    callback          : function (response) {
-                        self.$onCaptchaSuccess(response);
-                    },
-                    'expired-callback': function () {
-                        self.$onCaptchaExpired();
-                    }
+            var Options = {
+                sitekey           : this.getAttribute('sitekey'),
+                callback          : function (response) {
+                    console.log(response);
+                    self.$onCaptchaSuccess(response);
+                },
+                'expired-callback': function () {
+                    self.$onCaptchaExpired();
+                },
+                'error-callback': function() {
+                    console.log(arguments);
                 }
-            );
+            };
+
+            if (this.getAttribute('invisible')) {
+                Options.size = 'invisible';
+            }
+
+            grecaptcha.render(DisplayElm, Options);
+
+            if (this.getAttribute('invisible')) {
+                grecaptcha.execute();
+            }
         }
     });
 });

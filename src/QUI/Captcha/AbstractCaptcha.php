@@ -47,4 +47,14 @@ abstract class AbstractCaptcha implements CaptchaInterface
         $parts = explode('\\', get_called_class());
         return array_pop($parts);
     }
+
+    /**
+     * Check if this CAPTCHA has a visible representation or not
+     *
+     * @return bool
+     */
+    public static function isInvisible()
+    {
+        return false;
+    }
 }

@@ -51,4 +51,11 @@ interface CaptchaInterface
      * @return bool
      */
     public static function requiresJavaScript();
+
+    /**
+     * Check if this CAPTCHA has a visible representation or not
+     *
+     * @return bool
+     */
+    public static function isInvisible();
 }

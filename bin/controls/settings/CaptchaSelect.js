@@ -65,14 +65,12 @@ define('package/quiqqer/captcha/bin/controls/settings/CaptchaSelect', [
 
             this.Loader.show();
 
-            console.log(this);
-
             QUIAjax.get(
                 'package_quiqqer_captcha_ajax_getCaptchaList', function (modules) {
                     for (var i = 0, len = modules.length; i < len; i++) {
                         self.appendChild(
-                            modules[0].title,
-                            modules[0].name
+                            modules[i].title,
+                            modules[i].name
                         );
                     }
 
