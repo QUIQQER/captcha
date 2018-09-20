@@ -18,6 +18,7 @@ Features
 * Captcha Control that can be implemented anywhere
 * API to implement own CAPTCHA solutions
 * Google reCAPTCHA included
+* Google invisible reCAPTCHA included
 
 Installation
 ------------

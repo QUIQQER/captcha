@@ -13,8 +13,8 @@
 
         <!-- Settings -->
         <locale name="menu.title">
-            <de><![CDATA[QUIQQER Captcha]]></de>
-            <en><![CDATA[QUIQQER Captcha]]></en>
+            <de><![CDATA[Captcha]]></de>
+            <en><![CDATA[Captcha]]></en>
         </locale>
         <locale name="settings.category.modules.title">
             <de><![CDATA[Captcha-Module]]></de>

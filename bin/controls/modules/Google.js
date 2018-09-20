@@ -88,14 +88,13 @@ define('package/quiqqer/captcha/bin/controls/modules/Google', [
             var Options = {
                 sitekey           : this.getAttribute('sitekey'),
                 callback          : function (response) {
-                    console.log(response);
                     self.$onCaptchaSuccess(response);
                 },
                 'expired-callback': function () {
                     self.$onCaptchaExpired();
                 },
                 'error-callback': function() {
-                    console.log(arguments);
+                    // nothing
                 }
             };
 
