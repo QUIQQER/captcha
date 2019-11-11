@@ -79,7 +79,8 @@ define('package/quiqqer/captcha/bin/controls/modules/Google', [
         $onGoogleCaptchaLoaded: function () {
             window.loadingGoogleReCaptcha = false;
 
-            var self = this;
+            var self                            = this;
+            var reloadChallengeOnPrematureClose = true;
 
             this.Loader.hide();
 
@@ -88,13 +89,15 @@ define('package/quiqqer/captcha/bin/controls/modules/Google', [
             var Options = {
                 sitekey           : this.getAttribute('sitekey'),
                 callback          : function (response) {
+                    reloadChallengeOnPrematureClose = false;
                     self.$onCaptchaSuccess(response);
                 },
                 'expired-callback': function () {
+                    reloadChallengeOnPrematureClose = false;
                     self.$onCaptchaExpired();
                 },
-                'error-callback': function() {
-                    // nothing
+                'error-callback'  : function () {
+                    reloadChallengeOnPrematureClose = false;
                 }
             };
 
@@ -106,6 +109,37 @@ define('package/quiqqer/captcha/bin/controls/modules/Google', [
 
             if (this.getAttribute('invisible')) {
                 grecaptcha.execute();
+
+                // Wait for challenge window
+                var wait = setInterval(function () {
+                    var ChallengeWin = document.querySelector('iframe[src^="https://www.google.com/recaptcha"][src*="bframe"]');
+
+                    if (ChallengeWin) {
+                        var ObserverElm = ChallengeWin.getParent('div').getParent('div');
+
+                        clearInterval(wait);
+
+                        var Observer = new MutationObserver(function (mutations) {
+                            if (!reloadChallengeOnPrematureClose) {
+                                return;
+                            }
+
+                            if (ObserverElm &&
+                                (ObserverElm.style.visibility === 'hidden' ||
+                                    ObserverElm.style.opacity === 0)) {
+
+                                (function () {
+                                    grecaptcha.execute();
+                                }).delay(500);
+                            }
+                        });
+
+                        Observer.observe(ObserverElm, {
+                            attributes     : true,
+                            attributeFilter: ['style']
+                        });
+                    }
+                }, 1000);
             }
         }
     });
