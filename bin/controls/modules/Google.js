@@ -174,9 +174,13 @@ define('package/quiqqer/captcha/bin/controls/modules/Google', [
             var self = this;
 
             grecaptcha.ready(function () {
-                grecaptcha.execute(self.getAttribute('sitekey'), {action: 'submit'}).then(function (token) {
-                    self.$onCaptchaSuccess(token);
-                });
+                // refresh automatically every 120 seconds to prevent timeout
+                setInterval(function () {
+                    grecaptcha.execute(self.getAttribute('sitekey'), {action: 'submit'}).then(function (token) {
+                        console.log(token);
+                        self.$onCaptchaSuccess(token);
+                    });
+                }, 120000);
             });
         }
     });
