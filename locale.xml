@@ -49,8 +49,8 @@
             <en><![CDATA[Site key]]></en>
         </locale>
         <locale name="settings.google.siteKey.description" html="true">
-            <de><![CDATA[Googe reCAPTCHA v2 Websiteschlüssel. Siehe <a href="https://www.google.com/recaptcha/admin" target="_blank">https://www.google.com/recaptcha/admin</a>.]]></de>
-            <en><![CDATA[Google reCAPTCHA v2 Site key. See <a href="https://www.google.com/recaptcha/admin" target="_blank">https://www.google.com/recaptcha/admin</a>.]]></en>
+            <de><![CDATA[Googe reCAPTCHA v2 or v3 Websiteschlüssel. Siehe <a href="https://www.google.com/recaptcha/admin" target="_blank">https://www.google.com/recaptcha/admin</a>.]]></de>
+            <en><![CDATA[Google reCAPTCHA v2 or v3 Site key. See <a href="https://www.google.com/recaptcha/admin" target="_blank">https://www.google.com/recaptcha/admin</a>.]]></en>
         </locale>
         <locale name="settings.google.secretKey.title">
             <de><![CDATA[Geheimer Schlüssel]]></de>
@@ -59,18 +59,26 @@
 
         <!-- Module titles and descriptions -->
         <locale name="captcha.title.Google">
-            <de><![CDATA[Google (reCAPTCHA)]]></de>
-            <en><![CDATA[Google (reCAPTCHA)]]></en>
+            <de><![CDATA[Google (reCAPTCHA v2)]]></de>
+            <en><![CDATA[Google (reCAPTCHA v2)]]></en>
         </locale>
         <locale name="captcha.descrption.Google">
             <de><![CDATA[Benötigt JavaScript.]]></de>
             <en><![CDATA[Requires JavaScript.]]></en>
         </locale>
         <locale name="captcha.title.GoogleInvisible">
-            <de><![CDATA[Google (reCAPTCHA - unsichtbar)]]></de>
-            <en><![CDATA[Google (reCAPTCHA - invisible)]]></en>
+            <de><![CDATA[Google (reCAPTCHA v2 - unsichtbar)]]></de>
+            <en><![CDATA[Google (reCAPTCHA v2 - invisible)]]></en>
         </locale>
         <locale name="captcha.descrption.GoogleInvisible">
+            <de><![CDATA[Benötigt JavaScript.]]></de>
+            <en><![CDATA[Requires JavaScript.]]></en>
+        </locale>
+        <locale name="captcha.title.GoogleV3">
+            <de><![CDATA[Google (reCAPTCHA v3)]]></de>
+            <en><![CDATA[Google (reCAPTCHA v3)]]></en>
+        </locale>
+        <locale name="captcha.descrption.GoogleV3">
             <de><![CDATA[Benötigt JavaScript.]]></de>
             <en><![CDATA[Requires JavaScript.]]></en>
         </locale>
