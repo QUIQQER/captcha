@@ -93,8 +93,8 @@ define('package/quiqqer/captcha/bin/controls/modules/Google', [
                     self.$onCaptchaSuccess(response);
                 },
                 'expired-callback': function () {
-                    reloadChallengeOnPrematureClose = false;
-                    self.$onCaptchaExpired();
+                    grecaptcha.reset();
+                    //self.$onCaptchaExpired();
                 },
                 'error-callback'  : function () {
                     reloadChallengeOnPrematureClose = false;
