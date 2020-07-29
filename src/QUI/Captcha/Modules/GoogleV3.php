@@ -3,9 +3,14 @@
 namespace QUI\Captcha\Modules;
 
 use QUI;
-use QUI\Captcha\Modules\Google\Control;
+use QUI\Captcha\Modules\GoogleV3\Control;
 
-class Google extends QUI\Captcha\AbstractCaptcha
+/**
+ * Class GoogleV3
+ *
+ * Captcha provider vor Google reCAPTCHA v3
+ */
+class GoogleV3 extends Google
 {
     /**
      * Get control to show captcha
@@ -15,6 +20,16 @@ class Google extends QUI\Captcha\AbstractCaptcha
     public static function getControl()
     {
         return new Control();
+    }
+
+    /**
+     * Check if this CAPTCHA has a visible representation or not
+     *
+     * @return bool
+     */
+    public static function isInvisible()
+    {
+        return true;
     }
 
     /**
@@ -62,38 +77,17 @@ class Google extends QUI\Captcha\AbstractCaptcha
             return false;
         }
 
-        return $validationResponse['success'];
-    }
+        if (empty($validationResponse['success'])) {
+            return false;
+        }
 
-    /**
-     * Get Google reCAPTCHA v2 Site Key
-     *
-     * @return string|false
-     * @throws QUI\Exception
-     */
-    public static function getSiteKey()
-    {
-        return QUI::getPackage('quiqqer/captcha')->getConfig()->getValue('google', 'siteKey');
-    }
+        // Evaluate reCAPTCHA v3 score
+        $score = (float)$validationResponse['score'];
 
-    /**
-     * Get Google reCAPTCHA v2 Secret Key
-     *
-     * @return string|false
-     * @throws QUI\Exception
-     */
-    protected static function getSecretKey()
-    {
-        return QUI::getPackage('quiqqer/captcha')->getConfig()->getValue('google', 'secretKey');
-    }
+        if ($score <= 0) {
+            return false;
+        }
 
-    /**
-     * Does this Captcha module require JavaScript?
-     *
-     * @return bool
-     */
-    public static function requiresJavaScript()
-    {
         return true;
     }
 }

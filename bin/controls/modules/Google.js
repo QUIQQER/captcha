@@ -20,18 +20,24 @@ define('package/quiqqer/captcha/bin/controls/modules/Google', [
         Binds: [
             '$onImport',
             '$onGoogleCaptchaLoaded',
-            '$onGoogleCatpchaSuccess'
+            '$onGoogleCatpchaSuccess',
+            '$renderV2',
+            '$renderV3'
         ],
 
         options: {
-            sitekey  : false,   // Google reCAPTCHA v2 Site Key
-            invisible: false    // use invisible captcha
+            sitekey  : false,   // Google reCAPTCHA v2/v3 Site Key
+            invisible: false,   // use invisible captcha
+            v3       : false,   // use reCAPTCHA v3
         },
 
         initialize: function (options) {
             this.parent(options);
 
-            this.Loader = new QUILoader();
+            this.Loader      = new QUILoader();
+            this.$DisplayElm = null;
+
+            this.$reloadChallengeOnPrematureClose = true;
 
             this.addEvents({
                 onImport: this.$onImport
@@ -66,11 +72,19 @@ define('package/quiqqer/captcha/bin/controls/modules/Google', [
             window.$onGoogleCaptchaLoaded = this.$onGoogleCaptchaLoaded;
             window.loadingGoogleReCaptcha = true;
 
-            new Element('script', {
-                src  : 'https://www.google.com/recaptcha/api.js?onload=$onGoogleCaptchaLoaded&render=explicit',
-                async: true,
-                defer: true
-            }).inject(document.head);
+            if (this.getAttribute('v3')) {
+                new Element('script', {
+                    src  : 'https://www.google.com/recaptcha/api.js?onload=$onGoogleCaptchaLoaded&render=' + this.getAttribute('sitekey'),
+                    async: true,
+                    defer: true
+                }).inject(document.head);
+            } else {
+                new Element('script', {
+                    src  : 'https://www.google.com/recaptcha/api.js?onload=$onGoogleCaptchaLoaded&render=explicit',
+                    async: true,
+                    defer: true
+                }).inject(document.head);
+            }
         },
 
         /**
@@ -79,17 +93,27 @@ define('package/quiqqer/captcha/bin/controls/modules/Google', [
         $onGoogleCaptchaLoaded: function () {
             window.loadingGoogleReCaptcha = false;
 
-            var self                            = this;
-            var reloadChallengeOnPrematureClose = true;
-
             this.Loader.hide();
 
-            var DisplayElm = this.$Elm.getElement('.quiqqer-captcha-google-display');
+            this.$DisplayElm = this.$Elm.getElement('.quiqqer-captcha-google-display');
+
+            if (this.getAttribute('v3')) {
+                this.$renderV3();
+            } else {
+                this.$renderV2();
+            }
+        },
+
+        /**
+         * Render Google reCAPTCHA v2
+         */
+        $renderV2: function () {
+            var self = this;
 
             var Options = {
                 sitekey           : this.getAttribute('sitekey'),
                 callback          : function (response) {
-                    reloadChallengeOnPrematureClose = false;
+                    self.$reloadChallengeOnPrematureClose = false;
                     self.$onCaptchaSuccess(response);
                 },
                 'expired-callback': function () {
@@ -97,7 +121,7 @@ define('package/quiqqer/captcha/bin/controls/modules/Google', [
                     //self.$onCaptchaExpired();
                 },
                 'error-callback'  : function () {
-                    reloadChallengeOnPrematureClose = false;
+                    self.$reloadChallengeOnPrematureClose = false;
                 }
             };
 
@@ -105,9 +129,9 @@ define('package/quiqqer/captcha/bin/controls/modules/Google', [
                 Options.size = 'invisible';
             }
 
-            grecaptcha.render(DisplayElm, Options);
+            grecaptcha.render(this.$DisplayElm, Options);
 
-            if (this.getAttribute('invisible')) {
+            if (self.getAttribute('invisible')) {
                 grecaptcha.execute();
 
                 // Wait for challenge window
@@ -120,7 +144,7 @@ define('package/quiqqer/captcha/bin/controls/modules/Google', [
                         clearInterval(wait);
 
                         var Observer = new MutationObserver(function (mutations) {
-                            if (!reloadChallengeOnPrematureClose) {
+                            if (!self.$reloadChallengeOnPrematureClose) {
                                 return;
                             }
 
@@ -141,6 +165,19 @@ define('package/quiqqer/captcha/bin/controls/modules/Google', [
                     }
                 }, 1000);
             }
+        },
+
+        /**
+         * Render Google reCAPTCHA v3
+         */
+        $renderV3: function () {
+            var self = this;
+
+            grecaptcha.ready(function () {
+                grecaptcha.execute(self.getAttribute('sitekey'), {action: 'submit'}).then(function (token) {
+                    self.$onCaptchaSuccess(token);
+                });
+            });
         }
     });
 });
